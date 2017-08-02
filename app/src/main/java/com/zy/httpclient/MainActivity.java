@@ -3,16 +3,20 @@ package com.zy.httpclient;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
-import java.io.IOException;
+import com.zy.httpclient.bean.WXItemBean;
+import com.zy.httpclient.bean.WeiChatParam;
+import com.zy.httpclient.constans.Constants;
+import com.zy.httpclient.http.BaseHttpCallBack;
+import com.zy.httpclient.http.HttpClientManager;
+import com.zy.httpclient.http.enums.HttpClientMethod;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,20 +25,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onTest(View view) {
-        String url = "";
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url(url).build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
+        WeiChatParam weiChatParam = new WeiChatParam();
+        weiChatParam.setKey(Constants.KEY_API);
+        weiChatParam.setNum(20);
+        weiChatParam.setPage(1);
+        HttpClientManager clientManager = new HttpClientManager.Builder().setHttpClientMethond(HttpClientMethod.GET).setApiMethod("wxnew").build();
+        clientManager.execute(weiChatParam, new BaseHttpCallBack<List<WXItemBean>>() {
 
+            @Override
+            public void onNext(List<WXItemBean> response) {
+                Toast.makeText(MainActivity.this, response.get(0).getUrl(), Toast.LENGTH_SHORT).
+                        show();
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onSubError(String message) {
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onError(String message) {
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }

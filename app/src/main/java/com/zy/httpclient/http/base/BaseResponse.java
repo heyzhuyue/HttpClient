@@ -4,13 +4,13 @@ package com.zy.httpclient.http.base;
  * Created by zy on 2017/8/1.
  */
 
-public class BaseResponse<T> {
+public class BaseResponse {
 
     private int code;
 
     private String msg;
 
-    private T newslist;
+    private Object newslist;
 
     public int getCode() {
         return code;
@@ -28,11 +28,11 @@ public class BaseResponse<T> {
         this.msg = msg;
     }
 
-    public T getNewslist() {
+    public Object getNewslist() {
         return newslist;
     }
 
-    public void setNewslist(T newslist) {
+    public void setNewslist(Object newslist) {
         this.newslist = newslist;
     }
 }
