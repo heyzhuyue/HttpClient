@@ -21,7 +21,7 @@ public abstract class HttpQuestBody {
     protected int id;
     protected Request.Builder builder = new Request.Builder();
 
-    private HttpQuestBody(String url, Object tag, Map<String, String> params, Map<String, String> headers, int id) {
+    protected HttpQuestBody(String url, Object tag, Map<String, String> params, Map<String, String> headers, int id) {
         this.url = url;
         this.tag = tag;
         this.params = params;
@@ -41,7 +41,7 @@ public abstract class HttpQuestBody {
         appendHeaders();
     }
 
-    protected void appendHeaders() {
+    private void appendHeaders() {
         Headers.Builder headerBuilder = new Headers.Builder();
         if (headers == null || headers.isEmpty()) return;
 
@@ -52,13 +52,13 @@ public abstract class HttpQuestBody {
     }
 
 
-    protected RequestBody wrapRequestBody(RequestBody requestBody, final BaseCallBack callback) {
+    private RequestBody wrapRequestBody(RequestBody requestBody, final BaseCallBack callback) {
         return requestBody;
     }
 
-    protected abstract RequestBody buildRequestBody();
+    abstract RequestBody buildRequestBody();
 
-    protected abstract Request buildRequest(RequestBody requestBody);
+    abstract Request buildRequest(RequestBody requestBody);
 
     public Request generateRequest(BaseCallBack callback) {
         RequestBody requestBody = buildRequestBody();
