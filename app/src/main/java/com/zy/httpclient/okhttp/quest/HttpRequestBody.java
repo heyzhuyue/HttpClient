@@ -1,6 +1,6 @@
 package com.zy.httpclient.okhttp.quest;
 
-import com.zy.httpclient.okhttp.callback.BaseCallBack;
+import com.zy.httpclient.okhttp.HttpClientHelper;
 
 import java.util.Map;
 
@@ -12,16 +12,16 @@ import okhttp3.RequestBody;
  * Created by zy on 2017/8/2.
  */
 
-public abstract class HttpQuestBody {
+public abstract class HttpRequestBody {
 
     protected String url;
     protected Object tag;
+    protected int id;
     protected Map<String, String> params;
     protected Map<String, String> headers;
-    protected int id;
     protected Request.Builder builder = new Request.Builder();
 
-    protected HttpQuestBody(String url, Object tag, Map<String, String> params, Map<String, String> headers, int id) {
+    protected HttpRequestBody(String url, Object tag, Map<String, String> params, Map<String, String> headers, int id) {
         this.url = url;
         this.tag = tag;
         this.params = params;
@@ -41,6 +41,9 @@ public abstract class HttpQuestBody {
         appendHeaders();
     }
 
+    /**
+     * 添加Header
+     */
     private void appendHeaders() {
         Headers.Builder headerBuilder = new Headers.Builder();
         if (headers == null || headers.isEmpty()) return;
@@ -51,19 +54,22 @@ public abstract class HttpQuestBody {
         builder.headers(headerBuilder.build());
     }
 
+    public HttpClientHelper build() {
+        return new HttpClientHelper(this);
+    }
 
-    private RequestBody wrapRequestBody(RequestBody requestBody, final BaseCallBack callback) {
-        return requestBody;
+    /**
+     * 创建Request
+     *
+     * @return
+     */
+    public Request generateRequest() {
+        RequestBody requestBody = buildRequestBody();
+        Request request = buildRequest(requestBody);
+        return request;
     }
 
     abstract RequestBody buildRequestBody();
 
     abstract Request buildRequest(RequestBody requestBody);
-
-    public Request generateRequest(BaseCallBack callback) {
-        RequestBody requestBody = buildRequestBody();
-        RequestBody wrappedRequestBody = wrapRequestBody(requestBody, callback);
-        Request request = buildRequest(wrappedRequestBody);
-        return request;
-    }
 }

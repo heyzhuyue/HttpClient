@@ -3,6 +3,7 @@ package com.zy.httpclient.http;
 import com.zy.httpclient.constans.Constants;
 import com.zy.httpclient.http.enums.HttpClientMethod;
 import com.zy.httpclient.http.interfaces.HttpClientDefaultDeploy;
+import com.zy.httpclient.utils.HttpUtils;
 
 import java.util.HashMap;
 import java.util.Map;

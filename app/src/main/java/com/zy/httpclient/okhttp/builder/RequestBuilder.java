@@ -1,6 +1,6 @@
 package com.zy.httpclient.okhttp.builder;
 
-import com.zy.httpclient.http.HttpExecuteHelper;
+import com.zy.httpclient.okhttp.HttpClientHelper;
 
 import java.util.Map;
 
@@ -10,10 +10,25 @@ import java.util.Map;
 
 public abstract class RequestBuilder<T extends RequestBuilder> {
 
+    /**
+     * 请求Url地址
+     */
     protected String url;
+    /**
+     * Tgg
+     */
     protected Object tag;
+    /**
+     * 请求Header
+     */
     protected Map<String, String> headers;
+    /**
+     * 请求参数
+     */
     protected Map<String, String> params;
+    /**
+     * id
+     */
     protected int id;
 
     public T setUrl(String url) {
@@ -41,5 +56,5 @@ public abstract class RequestBuilder<T extends RequestBuilder> {
         return (T) this;
     }
 
-    public abstract HttpExecuteHelper build();
+    public abstract HttpClientHelper build();
 }

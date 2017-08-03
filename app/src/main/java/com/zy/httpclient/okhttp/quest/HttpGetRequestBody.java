@@ -9,9 +9,9 @@ import okhttp3.RequestBody;
  * Created by zy on 2017/8/2.
  */
 
-public class GetQuestBody extends HttpQuestBody {
+public class HttpGetRequestBody extends HttpRequestBody {
 
-    private GetQuestBody(String url, Object tag, Map<String, String> params, Map<String, String> headers, int id) {
+    public HttpGetRequestBody(String url, Object tag, Map<String, String> params, Map<String, String> headers, int id) {
         super(url, tag, params, headers, id);
     }
 

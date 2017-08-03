@@ -1,4 +1,6 @@
-package com.zy.httpclient.okhttp.builder;
+package com.zy.httpclient.okhttp.interfaces;
+
+import com.zy.httpclient.okhttp.builder.RequestBuilder;
 
 import java.util.Map;
 
