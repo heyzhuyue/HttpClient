@@ -1,7 +1,7 @@
-package com.zy.httpclient.okhttp.builder;
+package com.zy.httplib.okhttp.builder;
 
-import com.zy.httpclient.okhttp.HttpClientHelper;
-import com.zy.httpclient.okhttp.quest.HttpPostStringRequestBody;
+import com.zy.httplib.okhttp.HttpClientHelper;
+import com.zy.httplib.okhttp.body.HttpPostStringRequestBody;
 
 import okhttp3.MediaType;
 
@@ -11,7 +11,13 @@ import okhttp3.MediaType;
 
 public class PostStringRequestBuilder extends RequestBuilder<PostStringRequestBuilder> {
 
+    /**
+     * 内容
+     */
     private String content;
+    /**
+     * POST请求编码格式
+     */
     private MediaType mediaType;
 
     public PostStringRequestBuilder setContent(String content) {

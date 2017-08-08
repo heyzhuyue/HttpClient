@@ -11,7 +11,6 @@ public enum HttpClientMethod {
     PUT("PUT"),
     PATCH("PATCH"),
     DELETE("DELETE"),
-    COPY("COPY"),
     HEAD("HEAD");
 
     private String value;

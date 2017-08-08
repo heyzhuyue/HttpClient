@@ -3,7 +3,7 @@ package com.zy.httpclient.http;
 import com.zy.httpclient.constans.Constants;
 import com.zy.httpclient.http.enums.HttpClientMethod;
 import com.zy.httpclient.http.interfaces.HttpClientDefaultDeploy;
-import com.zy.httpclient.utils.HttpUtils;
+import com.zy.httplib.utils.HttpUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -85,8 +85,8 @@ public class HttpExecuteHelper implements HttpClientDefaultDeploy {
     @Override
     public HttpExecuteHelper addParameter(Object param) {
         parameters.clear();
-        Map<String, Object> params = HttpUtils.beanToMap(param);
-        for (Map.Entry<String, Object> entry : params.entrySet()) {
+        Map<String, String> params = HttpUtils.beanToMap(param);
+        for (Map.Entry<String, String> entry : params.entrySet()) {
             parameters.put(entry.getKey(), entry.getValue());
         }
         return this;

@@ -1,10 +1,10 @@
-package com.zy.httpclient.okhttp.builder;
+package com.zy.httplib.okhttp.builder;
 
 import android.net.Uri;
 
-import com.zy.httpclient.okhttp.HttpClientHelper;
-import com.zy.httpclient.okhttp.interfaces.HasParamsable;
-import com.zy.httpclient.okhttp.quest.HttpGetRequestBody;
+import com.zy.httplib.okhttp.HttpClientHelper;
+import com.zy.httplib.okhttp.interfaces.HasParamsable;
+import com.zy.httplib.okhttp.body.HttpGetRequestBody;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;

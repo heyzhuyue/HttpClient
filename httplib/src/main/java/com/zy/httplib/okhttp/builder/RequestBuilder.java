@@ -1,6 +1,6 @@
-package com.zy.httpclient.okhttp.builder;
+package com.zy.httplib.okhttp.builder;
 
-import com.zy.httpclient.okhttp.HttpClientHelper;
+import com.zy.httplib.okhttp.HttpClientHelper;
 
 import java.util.Map;
 
@@ -15,7 +15,7 @@ public abstract class RequestBuilder<T extends RequestBuilder> {
      */
     protected String url;
     /**
-     * Tgg
+     * Tag
      */
     protected Object tag;
     /**

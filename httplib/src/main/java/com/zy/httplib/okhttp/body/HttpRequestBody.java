@@ -1,6 +1,7 @@
-package com.zy.httpclient.okhttp.quest;
+package com.zy.httplib.okhttp.body;
 
-import com.zy.httpclient.okhttp.HttpClientHelper;
+import com.zy.httplib.okhttp.HttpClientHelper;
+import com.zy.httplib.okhttp.callback.BaseCallBack;
 
 import java.util.Map;
 
@@ -54,10 +55,6 @@ public abstract class HttpRequestBody {
         builder.headers(headerBuilder.build());
     }
 
-    public HttpClientHelper build() {
-        return new HttpClientHelper(this);
-    }
-
     /**
      * 创建Request
      *
@@ -67,6 +64,18 @@ public abstract class HttpRequestBody {
         RequestBody requestBody = buildRequestBody();
         Request request = buildRequest(requestBody);
         return request;
+    }
+
+    protected RequestBody wrapRequestBody(RequestBody requestBody, final BaseCallBack callback) {
+        return requestBody;
+    }
+
+    public HttpClientHelper build() {
+        return new HttpClientHelper(this);
+    }
+
+    public int getId() {
+        return id;
     }
 
     abstract RequestBody buildRequestBody();
