@@ -6,20 +6,12 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 /**
- * Created by zy on 2017/8/2.
+ * Created by zy on 2017/8/16.
  */
 
-public class HttpGetRequestBody extends HttpRequestBody {
+public class HttpPostRequestBody extends HttpRequestBody {
 
-    /**
-     * 请求地址
-     *
-     * @param url
-     * @param tag
-     * @param headers
-     * @param id
-     */
-    public HttpGetRequestBody(String url, Object tag,  Map<String, String> headers, int id) {
+    public HttpPostRequestBody(String url, Object tag, Map<String, String> headers, int id) {
         super(url, tag, headers, id);
     }
 

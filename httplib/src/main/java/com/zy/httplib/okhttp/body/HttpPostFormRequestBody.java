@@ -25,14 +25,16 @@ import okhttp3.RequestBody;
 public class HttpPostFormRequestBody extends HttpRequestBody {
 
     private List<PostFormRequestBuilder.FileInput> files;
+    private Map<String, String> params;
 
     public HttpPostFormRequestBody(String url, Object tag, Map<String, String> params, Map<String, String> headers, int id, List<PostFormRequestBuilder.FileInput> files) {
-        super(url, tag, params, headers, id);
+        super(url, tag, headers, id);
+        this.params = params;
         this.files = files;
     }
 
     @Override
-    RequestBody buildRequestBody() {
+    protected RequestBody buildRequestBody() {
         if (files == null || files.isEmpty()) { //不存在文件
             FormBody.Builder builder = new FormBody.Builder();
             addParams(builder);
@@ -62,7 +64,7 @@ public class HttpPostFormRequestBody extends HttpRequestBody {
     }
 
     @Override
-    Request buildRequest(RequestBody requestBody) {
+    protected Request buildRequest(RequestBody requestBody) {
         return builder.post(requestBody).build();
     }
 

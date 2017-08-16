@@ -23,12 +23,12 @@ public class HttpPostStringRequestBody extends HttpRequestBody {
     private String content;
     private MediaType mediaType;
 
-    public HttpPostStringRequestBody(String url, Object tag, Map<String, String> params, Map<String, String> headers, int id, String content, MediaType mediaType) {
-        super(url, tag, params, headers, id);
+    public HttpPostStringRequestBody(String url, Object tag, Map<String, String> headers, int id, String content, MediaType mediaType) {
+        super(url, tag, headers, id);
         this.content = content;
         this.mediaType = mediaType;
         if (this.content == null) {
-            throw new RuntimeException();
+            throw new NullPointerException("content不能为空");
         }
         if (this.mediaType == null) {
             this.mediaType = MEDIA_TYPE_PLAIN;
@@ -36,12 +36,12 @@ public class HttpPostStringRequestBody extends HttpRequestBody {
     }
 
     @Override
-    RequestBody buildRequestBody() {
+    protected RequestBody buildRequestBody() {
         return RequestBody.create(mediaType, content);
     }
 
     @Override
-    Request buildRequest(RequestBody requestBody) {
+    protected Request buildRequest(RequestBody requestBody) {
         return builder.post(requestBody).build();
     }
 }

@@ -18,14 +18,12 @@ public abstract class HttpRequestBody {
     protected String url;
     protected Object tag;
     protected int id;
-    protected Map<String, String> params;
     protected Map<String, String> headers;
     protected Request.Builder builder = new Request.Builder();
 
-    protected HttpRequestBody(String url, Object tag, Map<String, String> params, Map<String, String> headers, int id) {
+    protected HttpRequestBody(String url, Object tag, Map<String, String> headers, int id) {
         this.url = url;
         this.tag = tag;
-        this.params = params;
         this.headers = headers;
         this.id = id;
         if (url == null) {
@@ -78,7 +76,7 @@ public abstract class HttpRequestBody {
         return id;
     }
 
-    abstract RequestBody buildRequestBody();
+    protected abstract RequestBody buildRequestBody();
 
-    abstract Request buildRequest(RequestBody requestBody);
+    protected abstract Request buildRequest(RequestBody requestBody);
 }

@@ -2,7 +2,7 @@ package com.zy.httpclient.http;
 
 import android.text.TextUtils;
 
-import com.zy.httpclient.http.enums.HttpClientMethod;
+import com.zy.httplib.okhttp.enums.HttpClientMethod;
 
 /**
  * Created by zhuyue on 2017/8/1
@@ -10,48 +10,27 @@ import com.zy.httpclient.http.enums.HttpClientMethod;
 
 public class HttpClientManager {
 
-    private int mConnectionTime;
-
-    private int mReadTimeOut;
-
-    private int mWriteTimeOut;
-
+    /**
+     * 请求方式
+     */
     private HttpClientMethod mHttpClientMethod = HttpClientMethod.POST;
 
+    /**
+     * 请求方法
+     */
     private String mApiMethod;
 
     public HttpClientManager(Builder builder) {
-        this.mConnectionTime = builder.mConnectionTimeOut;
-        this.mReadTimeOut = builder.mReadTimeOut;
         this.mHttpClientMethod = builder.mHttpClientMethod;
         this.mApiMethod = builder.mApiMethod;
-        this.mWriteTimeOut = builder.mWriteTimeOut;
     }
 
     public static class Builder {
 
-        private int mConnectionTimeOut = 400;
-
-        private int mReadTimeOut = 400;
-
-        private int mWriteTimeOut = 400;
 
         private HttpClientMethod mHttpClientMethod = HttpClientMethod.POST;
 
         private String mApiMethod;
-
-        public Builder setConnectionTimeOut(int connectionTimeOut) {
-            this.mConnectionTimeOut = connectionTimeOut;
-            return this;
-        }
-
-        public void setReadTimeOut(int readTimeOut) {
-            this.mReadTimeOut = readTimeOut;
-        }
-
-        public void setWriteTimeOut(int writeTimeOut) {
-            this.mWriteTimeOut = writeTimeOut;
-        }
 
         public Builder setHttpClientMethond(HttpClientMethod httpClientMethod) {
             this.mHttpClientMethod = httpClientMethod;
@@ -87,12 +66,8 @@ public class HttpClientManager {
             baseHttpCallBack.onError("接口地址为空");
             return;
         }
-        HttpExecuteHelper httpExecuteHelper = new HttpExecuteHelper();
+        HttpExecuteHelper httpExecuteHelper = new HttpExecuteHelper(mHttpClientMethod);
         httpExecuteHelper.setApiMethod(mApiMethod);
-        httpExecuteHelper.setConnectTimeOut(mConnectionTime);
-        httpExecuteHelper.setReadTimeOut(mReadTimeOut);
-        httpExecuteHelper.setRequestMethod(mHttpClientMethod);
-        httpExecuteHelper.setWriteTimeOut(mWriteTimeOut);
         httpExecuteHelper.addParameter(param);
         httpExecuteHelper.execute(baseHttpCallBack);
     }

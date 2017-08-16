@@ -32,6 +32,6 @@ public class PostStringRequestBuilder extends RequestBuilder<PostStringRequestBu
 
     @Override
     public HttpClientHelper build() {
-        return new HttpPostStringRequestBody(url, tag, params, headers, id, content, mediaType).build();
+        return new HttpPostStringRequestBody(url, tag, headers, id, content, mediaType).build();
     }
 }

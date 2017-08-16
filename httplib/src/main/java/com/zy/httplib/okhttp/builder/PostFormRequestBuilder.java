@@ -18,7 +18,7 @@ public class PostFormRequestBuilder extends RequestBuilder<PostFormRequestBuilde
     private List<FileInput> files = new ArrayList<>();
 
     @Override
-    public RequestBuilder params(Map<String, String> params) {
+    public PostFormRequestBuilder setParams(Map<String, String> params) {
         this.params = params;
         return this;
     }

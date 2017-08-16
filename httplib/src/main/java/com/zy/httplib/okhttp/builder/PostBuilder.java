@@ -3,8 +3,8 @@ package com.zy.httplib.okhttp.builder;
 import android.net.Uri;
 
 import com.zy.httplib.okhttp.HttpClientHelper;
+import com.zy.httplib.okhttp.body.HttpPostRequestBody;
 import com.zy.httplib.okhttp.interfaces.HasParamsable;
-import com.zy.httplib.okhttp.body.HttpGetRequestBody;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -12,17 +12,19 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by zy on 2017/8/2.
+ * Created by zy on 2017/8/16.
  */
 
-public class GetRequestBuilder extends RequestBuilder<GetRequestBuilder> implements HasParamsable {
+public class PostBuilder extends RequestBuilder<PostBuilder> implements HasParamsable {
+
+    private Map<String, String> params;
 
     @Override
     public HttpClientHelper build() {
         if (params != null) {
             url = appendParamsForUrl(url, params);
         }
-        return new HttpGetRequestBody(url, tag, headers, id).build();
+        return new HttpPostRequestBody(url, tag, headers, id).build();
     }
 
     /**
@@ -47,7 +49,7 @@ public class GetRequestBuilder extends RequestBuilder<GetRequestBuilder> impleme
     }
 
     @Override
-    public GetRequestBuilder setParams(Map<String, String> params) {
+    public PostBuilder setParams(Map<String, String> params) {
         this.params = params;
         return this;
     }
@@ -60,5 +62,4 @@ public class GetRequestBuilder extends RequestBuilder<GetRequestBuilder> impleme
         params.put(key, val);
         return this;
     }
-
 }

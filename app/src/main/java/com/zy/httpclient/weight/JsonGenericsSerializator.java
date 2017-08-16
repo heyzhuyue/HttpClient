@@ -7,7 +7,7 @@ import com.zy.httplib.okhttp.interfaces.IGenericsSerializator;
  * Created by JimGong on 2016/6/23.
  */
 public class JsonGenericsSerializator implements IGenericsSerializator {
-    Gson mGson = new Gson();
+    private Gson mGson = new Gson();
 
     @Override
     public <T> T transform(String response, Class<T> classOfT) {

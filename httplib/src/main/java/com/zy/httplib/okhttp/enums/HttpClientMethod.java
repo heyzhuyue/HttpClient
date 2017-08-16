@@ -1,7 +1,7 @@
-package com.zy.httpclient.http.enums;
+package com.zy.httplib.okhttp.enums;
 
 /**
- * Created by zhuyue on 2017/8/1
+ * Created by zy on 2017/8/16.
  */
 
 public enum HttpClientMethod {
