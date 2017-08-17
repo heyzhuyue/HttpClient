@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.zy.httpclient.App;
 import com.zy.httpclient.constans.API;
 import com.zy.httpclient.http.base.BaseResponse;
 import com.zy.httpclient.http.interfaces.HttpClientDefaultDeploy;
@@ -13,6 +14,11 @@ import com.zy.httplib.okhttp.callback.StringCallBack;
 import com.zy.httplib.okhttp.enums.HttpClientMethod;
 import com.zy.httplib.utils.HttpUtils;
 
+import org.json.JSONException;
+
+import java.io.File;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +33,8 @@ public class HttpExecuteHelper implements HttpClientDefaultDeploy {
     private HttpClientMethod httpMethod = HttpClientMethod.POST;
     private Map<String, String> headers;
     private Map<String, String> params;
+    private boolean isCache = true;
+    private String cacheDir = App.getInstance().getCacheDir().getAbsolutePath() + File.separator + "data/NetCache";
 
     public HttpExecuteHelper(HttpClientMethod httpClientMethod) {
         httpMethod = httpClientMethod;
@@ -132,10 +140,24 @@ public class HttpExecuteHelper implements HttpClientDefaultDeploy {
 
                         @Override
                         public void onError(Call call, Exception e, int id) { //网络请求错误
-                            baseHttpCallBack.sendError(e.getMessage());
+                            if (e instanceof ConnectException) {
+                                baseHttpCallBack.sendError("服务器请求超时");
+                            } else if (e instanceof SocketTimeoutException) {
+                                baseHttpCallBack.sendError("服务器响应超时");
+                            } else if (e instanceof JSONException) {
+                                baseHttpCallBack.sendError("数据解析异常");
+                            } else {
+                                baseHttpCallBack.sendError(e.getMessage());
+                            }
                         }
                     });
         }
 
+    }
+
+    @Override
+    public HttpClientDefaultDeploy setCache(boolean isCache) {
+        this.isCache = isCache;
+        return this;
     }
 }

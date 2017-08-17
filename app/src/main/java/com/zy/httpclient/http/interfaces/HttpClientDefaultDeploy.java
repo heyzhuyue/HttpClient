@@ -54,4 +54,12 @@ public interface HttpClientDefaultDeploy {
      * @return 返回数据
      */
     void execute(BaseHttpCallBack baseHttpCallBack);
+
+    /**
+     * 是否缓存
+     *
+     * @return
+     */
+    HttpClientDefaultDeploy setCache(boolean isCache);
+
 }

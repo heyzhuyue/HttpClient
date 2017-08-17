@@ -34,4 +34,9 @@ public class PostStringRequestBuilder extends RequestBuilder<PostStringRequestBu
     public HttpClientHelper build() {
         return new HttpPostStringRequestBody(url, tag, headers, id, content, mediaType).build();
     }
+
+    @Override
+    public void setCache(boolean cache) {
+        this.isCache = cache;
+    }
 }

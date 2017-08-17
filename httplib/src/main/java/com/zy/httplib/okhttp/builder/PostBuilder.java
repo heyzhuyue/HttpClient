@@ -62,4 +62,9 @@ public class PostBuilder extends RequestBuilder<PostBuilder> implements HasParam
         params.put(key, val);
         return this;
     }
+
+    @Override
+    public void setCache(boolean cache) {
+        this.isCache = cache;
+    }
 }

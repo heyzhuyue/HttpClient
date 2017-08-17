@@ -4,7 +4,7 @@ package com.zy.httplib.utils;
  * Created by zy on 2017/8/16.
  */
 
-public class LoggingSwitch {
+public class OkHttpSwitch {
 
     /**
      * 初始化日志开关
@@ -40,5 +40,14 @@ public class LoggingSwitch {
      */
     public static void initConnTimeOut(long connTimeOut) {
         HttpUtils.setConnTimeOut(connTimeOut);
+    }
+
+    /**
+     * 设置缓存路径
+     *
+     * @param cacheDir 缓存路径
+     */
+    public static void setCacheDir(String cacheDir) {
+
     }
 }

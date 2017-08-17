@@ -11,7 +11,6 @@ import com.zy.httpclient.constans.API;
 import com.zy.httpclient.constans.Constant;
 import com.zy.httpclient.http.BaseHttpCallBack;
 import com.zy.httpclient.http.HttpClientManager;
-import com.zy.httplib.okhttp.enums.HttpClientMethod;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         weiChatParam.setNum(20);
         weiChatParam.setPage(1);
         HttpClientManager.Builder builder = new HttpClientManager.Builder();
-        builder.setHttpClientMethond(HttpClientMethod.POST).setApiMethod(API.WEICHAT_LIST_METHOD).build()
+        builder.setApiMethod(API.WEICHAT_LIST_METHOD).build()
                 .execute(weiChatParam, new BaseHttpCallBack<List<WXItemBean>>() {
                     @Override
                     protected void onNext(List<WXItemBean> list) {

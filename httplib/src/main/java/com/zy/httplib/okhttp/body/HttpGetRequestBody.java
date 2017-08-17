@@ -11,6 +11,8 @@ import okhttp3.RequestBody;
 
 public class HttpGetRequestBody extends HttpRequestBody {
 
+    private boolean isCache = true;
+
     /**
      * 请求地址
      *
@@ -19,8 +21,9 @@ public class HttpGetRequestBody extends HttpRequestBody {
      * @param headers
      * @param id
      */
-    public HttpGetRequestBody(String url, Object tag,  Map<String, String> headers, int id) {
+    public HttpGetRequestBody(String url, Object tag, Map<String, String> headers, int id, boolean isCache) {
         super(url, tag, headers, id);
+        this.isCache = isCache;
     }
 
     @Override

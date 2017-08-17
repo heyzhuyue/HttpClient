@@ -31,6 +31,11 @@ public abstract class RequestBuilder<T extends RequestBuilder> {
      */
     protected int id;
 
+    /**
+     * 是否缓存
+     */
+    protected boolean isCache = true;
+
     public T setUrl(String url) {
         this.url = url;
         return (T) this;
@@ -54,6 +59,10 @@ public abstract class RequestBuilder<T extends RequestBuilder> {
     public T setId(int id) {
         this.id = id;
         return (T) this;
+    }
+
+    public void setCache(boolean cache) {
+        isCache = cache;
     }
 
     public abstract HttpClientHelper build();

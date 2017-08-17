@@ -55,7 +55,7 @@ public class HttpClientHelper {
                         finBaseCallBack.onError(call, new IOException("请求取消"), id);
                         return;
                     }
-                    if (!finBaseCallBack.validateReponse(response, id)) {
+                    if (!finBaseCallBack.validateResponse(response, id)) {
                         finBaseCallBack.onError(call, new IOException("request failed"), id);
                     }
                     Object object = finBaseCallBack.parseNetworkResponse(response, id);

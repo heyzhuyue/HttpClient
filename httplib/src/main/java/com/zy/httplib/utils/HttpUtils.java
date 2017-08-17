@@ -1,5 +1,7 @@
 package com.zy.httplib.utils;
 
+import android.text.TextUtils;
+
 import com.zy.httplib.okhttp.builder.GetRequestBuilder;
 import com.zy.httplib.okhttp.builder.HeadRequestBuilder;
 import com.zy.httplib.okhttp.builder.OtherRequestBuilder;
@@ -8,8 +10,10 @@ import com.zy.httplib.okhttp.builder.PostFormRequestBuilder;
 import com.zy.httplib.okhttp.builder.PostStringRequestBuilder;
 import com.zy.httplib.okhttp.enums.HttpClientMethod;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -26,6 +30,7 @@ public class HttpUtils {
     public static long writeTimeOut;
     public static long connTimeOut;
     private static boolean isOpenLogging = true;
+    private static String cacheDir = "";//缓存路径
 
     public static void setIsOpenLogging(boolean isOpenLogging) {
         HttpUtils.isOpenLogging = isOpenLogging;
@@ -58,6 +63,12 @@ public class HttpUtils {
                 .writeTimeout(writeTimeOut, TimeUnit.MILLISECONDS)
                 .connectTimeout(connTimeOut, TimeUnit.MILLISECONDS)
                 .addInterceptor(loggingInterceptor);
+        if (!TextUtils.isEmpty(cacheDir)) {
+            File cacheFile = new File(cacheDir);//缓存文件夹
+            int cacheSize = 10 * 1024 * 1024;//缓存大小为10M
+            final Cache cache = new Cache(cacheFile, cacheSize); //创建缓存对象
+            builder.cache(cache);
+        }
         if (isOpenLogging) {
             builder.addInterceptor(loggingInterceptor);
         }

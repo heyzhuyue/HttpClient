@@ -22,7 +22,7 @@ public class GetRequestBuilder extends RequestBuilder<GetRequestBuilder> impleme
         if (params != null) {
             url = appendParamsForUrl(url, params);
         }
-        return new HttpGetRequestBody(url, tag, headers, id).build();
+        return new HttpGetRequestBody(url, tag, headers, id, isCache).build();
     }
 
     /**
@@ -61,4 +61,8 @@ public class GetRequestBuilder extends RequestBuilder<GetRequestBuilder> impleme
         return this;
     }
 
+    @Override
+    public void setCache(boolean cache) {
+        this.isCache = cache;
+    }
 }

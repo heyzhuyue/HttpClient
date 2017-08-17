@@ -25,12 +25,20 @@ public abstract class BaseCallBack<T> {
      *
      * @param response 请求返回Response
      * @param id       id
-     * @return
+     * @return 是否请求成功
      */
-    public boolean validateReponse(Response response, int id) {
+    public boolean validateResponse(Response response, int id) {
         return response.isSuccessful();
     }
 
+    /**
+     * 处理网络数据
+     *
+     * @param response Response
+     * @param id       id
+     * @return 所需数据
+     * @throws Exception 异常
+     */
     public abstract T parseNetworkResponse(Response response, int id) throws Exception;
 
     /**
